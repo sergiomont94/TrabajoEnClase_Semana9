@@ -26,7 +26,7 @@ void crearArchivo() {
 }
 
 void registrarHerramienta() {
-	ofstream ArchivoOut("ferreteria.dat", ios::out | ios::binary | ios::app);
+	ofstream ArchivoOut("ferreteria.dat", ios::out | ios::binary);
 
 	if (!ArchivoOut)
 	{
@@ -98,7 +98,7 @@ void imprimirHerramienta() {
 }
 
 void eliminarHerramienta(int cod) {
-	ofstream archivoEli("ferreteria.dat", ios::out | ios::binary | ios::app);
+	/*ofstream archivoEli("ferreteria.dat", ios::out | ios::binary | ios::app);
 
 
 	Herramienta elim;
@@ -133,8 +133,12 @@ void eliminarHerramienta(int cod) {
 		cin >> opc;
 
 
-	} while (opc != -1);
+	} while (opc != -1);*/
 	
 
+
+}
+
+int getPos(int pos) {
 
 }

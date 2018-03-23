@@ -24,6 +24,7 @@ void crearArchivo();
 void registrarHerramienta();
 void imprimirHerramienta();
 void eliminarHerramienta(int cod);
+int getPos(int pos);
 
 
 
