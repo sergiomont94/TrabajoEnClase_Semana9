@@ -7,7 +7,7 @@ using namespace std;
 //ofstream escribir,seekp
 
 void crearArchivo() {
-	ofstream ArchivoOutB("ferreteria.dat", ios::out | ios::binary | ios::app);
+	ofstream ArchivoOutB("ferreteria.dat", ios::out | ios::binary);
 
 	if (!ArchivoOutB)
 	{
@@ -33,7 +33,7 @@ void registrarHerramienta() {
 		cout << "Error al abrir ferreteria.dat ";
 		return;
 	}
-
+	
 	ArchivoOut.seekp(0, ios::beg);
 
 	cout << "\n\n == Registro de herramientas ==\n\n";
@@ -78,8 +78,8 @@ void imprimirHerramienta() {
 		return;
 	}
 
-	//archivoIn.seekg(0, ios::beg);
-	archivoIn.seekg(2 * sizeof(Herramienta));
+	archivoIn.seekg(0, ios::beg);
+	//archivoIn.seekg(2 * sizeof(Herramienta));
 
 	cout << "\n\n == Lista de herramientas == \n\n";
 	
@@ -135,10 +135,93 @@ void eliminarHerramienta(int cod) {
 
 	} while (opc != -1);*/
 	
+	int contador = 0;
+	int opcion = 0;
+	int nuevCodigo;
+	int nuevCantidad;
+	float nuevPrecio;
+	char nombre[30];
+
+	fstream archivo("ferreteria.dat", ios::in | ios::out | ios::binary);
+
+	if (!archivo) {
+		cout << "Error al abrir ferreteria.dat";
+		return;
+
+	}
+
+	archivo.seekp(0, ios::beg);
+	Herramienta actual;
+	Herramienta nueva;
 
 
+
+	archivo.read(reinterpret_cast< char *>(&actual), sizeof(Herramienta));
+
+	while (!archivo.eof()) {
+
+		if (actual.codigo != cod) {
+
+			contador = contador + 1;
+		}
+
+		else {
+			archivo.seekp(contador * sizeof(Herramienta), ios::beg);
+			actual.codigo = -1;
+			strcpy_s(actual.nombre, " ");
+			actual.cantidad = -1;
+			actual.precio = -1;
+			archivo.write(reinterpret_cast<const char *>(&actual), sizeof(Herramienta));
+			
+		}
+	}
 }
 
-int getPos(int pos) {
+void buscarPos(int pos) {
+	bool bandera = false;
 
+	int contador = 0;
+	int opcion = 0;
+	int nuevCodigo;
+	int nuevCantidad;
+	float nuevPrecio;
+	char nombre[30];
+
+	fstream archivo("ferreteria.dat", ios::in | ios::out | ios::binary);
+
+	if (!archivo) {
+
+		cout << "Error al abrir ferreteria.dat ";
+
+		return;
+
+	}
+
+	archivo.seekp(0, ios::beg);
+
+	Herramienta actual;
+
+	Herramienta nueva;
+	archivo.read(reinterpret_cast< char *>(&actual), sizeof(Herramienta));
+
+	while (!archivo.eof()) {
+
+		if (actual.codigo != pos) {
+
+			contador = contador + 1;
+			}
+
+		else {
+
+			archivo.seekp(contador * sizeof(Herramienta), ios::beg);
+
+			cout << "Nombre: " << actual.nombre << "\nCodigo :" << actual.codigo << "\nPrecio: " << actual.precio << "\nCantidad" << actual.cantidad << endl;
+			
+			break;
+
+			archivo.read(reinterpret_cast<char *>(&actual), sizeof(Herramienta));
+
+		}
+
+	}
 }

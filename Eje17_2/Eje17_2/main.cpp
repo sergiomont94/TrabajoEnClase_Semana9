@@ -7,7 +7,9 @@ int main() {
 
 	//crearArchivo();
 	//registrarHerramienta();
-	imprimirHerramienta();
+	//imprimirHerramienta();
+	//buscarPos(2);
+	//eliminarHerramienta(2);
 
 
 
